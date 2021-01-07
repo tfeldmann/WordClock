@@ -52,9 +52,8 @@ jobs:
 
       - name: Run make
         if: runner.os == 'Windows'
-        run: |
-          nmake release
-          mt.exe -manifest WordClock.exe.manifest -outputresource:WordClock.exe
+        run: nmake release
+        #mt.exe -manifest WordClock.exe.manifest -outputresource:WordClock.exe
 
       - name: Run make
         if: runner.os != 'Windows'
