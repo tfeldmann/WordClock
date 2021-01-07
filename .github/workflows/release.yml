@@ -22,7 +22,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        os: [ubuntu-latest, macos-latest, windows-latest]
+        os: [windows-latest] # ubuntu-latest, macos-latest,
     runs-on: ${{ matrix.os }}
 
     # Steps represent a sequence of tasks that will be executed as part of the job
@@ -61,6 +61,10 @@ jobs:
 
       - name: List files
         run: ls
+
+      - name: Deploy for win
+        if: runner.os == 'Windows'
+        run: windeployqt release
 
       - name: Upload build artifact (Windows)
         if: runner.os == 'Windows'
