@@ -42,15 +42,22 @@ jobs:
         uses: ilammy/msvc-dev-cmd@v1
 
       # windows qmake needs a spec for mingw, otherfile the makefile is malformed
-      - name: Run qmake
+      - name: Make on windows
         if: runner.os == 'Windows'
-        run: qmake WordClock.pro -spec win32-g++
+        run: qmake WordClock.pro
 
       - name: Run qmake
         if: runner.os != 'Windows'
         run: qmake WordClock.pro
 
       - name: Run make
+        if: runner.os == 'Windows'
+        run: |
+          nmake release
+          mt.exe -manifest WordClock.exe.manifest -outputresource:WordClock.exe
+
+      - name: Run make
+        if: runner.os != 'Windows'
         run: make
 
       - name: List files
@@ -60,19 +67,19 @@ jobs:
         if: runner.os == 'Windows'
         uses: actions/upload-artifact@v2
         with:
-          name: WordClock-windows
+          name: WordClock.exe
           path: WordClock.exe
 
-      - name: Compress on mac
+      - name: Deploy for mac
         if: runner.os == 'macOS'
-        run: tar -zcvf WordClock.tar.gz WordClock.app
+        run: macdeployqt WordClock.app -dmg
 
       - name: Upload build artifact (macOS)
         if: runner.os == 'macOS'
         uses: actions/upload-artifact@v2
         with:
-          name: WordClock-macos
-          path: WordClock.tar.gz
+          name: WordClock.dmg
+          path: WordClock.dmg
 
       - name: Upload build artifact (Linux)
         if: runner.os == 'Linux'
