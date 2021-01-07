@@ -39,7 +39,13 @@ jobs:
         if: runner.os == 'Windows'
         uses: ilammy/msvc-dev-cmd@v1
 
+      # windows qmake needs a spec for mingw, otherfile the makefile is malformed
       - name: Run qmake
+        if: runner.os == 'Windows'
+        run: qmake WordClock.pro -spec win32-g++
+
+      - name: Run qmake
+        if: runner.os != 'Windows'
         run: qmake WordClock.pro
 
       - name: Run make
