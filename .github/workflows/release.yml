@@ -35,12 +35,12 @@ jobs:
         # uses: jurplel/install-qt-action@a962fb91949c8e846a3e4a944d50e7ef5cc3a28a
         uses: jurplel/install-qt-action@v2.11.1
 
-      - name: List files
-        run: ls
+      - name: Install compiler
+        if: runner.os == 'Windows'
+        uses: ilammy/msvc-dev-cmd@v1
 
-      # Runs a single command using the runners shell
       - name: Run qmake
-        run: qmake
+        run: qmake WordClock.pro
 
       - name: Run make
         run: make
@@ -48,11 +48,24 @@ jobs:
       - name: List files
         run: ls
 
-      - name: Upload build artifact
+      - name: Upload build artifact (Windows)
+        if: runner.os == 'Windows'
         uses: actions/upload-artifact@v2
         with:
-          name: WordClock ${{ matrix.node-version }}
-          path: |
-            QmlWordClock
-            QmlWordClock.app
-            QmlWordClock.exe
+          name: WordClock.exe
+          path: WordClock.exe
+
+      - name: Upload build artifact (macOS)
+        if: runner.os == 'macOS'
+        uses: actions/upload-artifact@v2
+        with:
+          name: WordClock.app
+          path: WordClock.app
+
+      - name: Upload build artifact (Linux)
+        if: runner.os == 'Linux'
+        uses: actions/upload-artifact@v2
+        with:
+          name: WordClock
+          path: WordClock
+
