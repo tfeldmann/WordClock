@@ -66,8 +66,8 @@ jobs:
         if: runner.os == 'Windows'
         uses: actions/upload-artifact@v2
         with:
-          name: WordClock.exe
-          path: WordClock.exe
+          name: release-win
+          path: release/
 
       - name: Deploy for mac
         if: runner.os == 'macOS'
