@@ -52,20 +52,24 @@ jobs:
         if: runner.os == 'Windows'
         uses: actions/upload-artifact@v2
         with:
-          name: WordClock.exe
+          name: WordClock-windows
           path: WordClock.exe
+
+      - name: Compress on mac
+        if: runner.os == 'macOS'
+        run: tar -zcvf WordClock.tar.gz WordClock.app
 
       - name: Upload build artifact (macOS)
         if: runner.os == 'macOS'
         uses: actions/upload-artifact@v2
         with:
-          name: WordClock.app
-          path: WordClock.app
+          name: WordClock-macos
+          path: WordClock.tar.gz
 
       - name: Upload build artifact (Linux)
         if: runner.os == 'Linux'
         uses: actions/upload-artifact@v2
         with:
-          name: WordClock
+          name: WordClock-linux
           path: WordClock
 
