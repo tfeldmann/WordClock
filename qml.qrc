@@ -1,0 +1,6 @@
+<RCC>
+    <qresource prefix="/">
+        <file>main.qml</file>
+        <file>wordclock.js</file>
+    </qresource>
+</RCC>
