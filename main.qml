@@ -34,7 +34,7 @@ Window {
         columns: 11
         anchors.centerIn: parent
         Repeater {
-            model: Array.from(Wordclock.layout(language))
+            model: Array.from(Wordclock.find_layout(language).letters)
             Rectangle {
                 width: rect_size
                 height: rect_size
