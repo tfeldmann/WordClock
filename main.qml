@@ -10,6 +10,7 @@ Window {
     width: 450
     height: 440
     color: "#000000"
+    title: "WordClock"
 
     property var language: Qt.locale().name
     property var letters: Array(110).fill(0)
