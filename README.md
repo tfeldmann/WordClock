@@ -1,5 +1,8 @@
 # WordClock
+
 A word clock for your desktop written in QML.
+
+[Download for macOS](https://github.com/tfeldmann/WordClock/releases/download/v1.0/WordClock.dmg)
 
 ![Screenshot](docs/wordclock-en.png)
 
@@ -21,6 +24,7 @@ now edit in `Info.plist`
 ```
 
 And create the dmg
+
 ```
 macdeployqt WordClock.app -dmg
 ```
